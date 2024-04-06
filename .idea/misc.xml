@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/ex-provider/pom.xml" />
         <option value="$PROJECT_DIR$/ex-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/ex-common/pom.xml" />
+        <option value="$PROJECT_DIR$/lnc-rpc-core/pom.xml" />
       </list>
     </option>
   </component>
