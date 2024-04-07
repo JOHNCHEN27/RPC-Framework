@@ -1,0 +1,4 @@
+rpc:
+  name: lnc
+  version: 3.0
+  serverPort: 9999
