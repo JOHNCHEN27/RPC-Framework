@@ -1,0 +1,2 @@
+json=com.lncanswer.rpc.serializer.JsonSerializer
+kryo=com.lncanswer.rpc.serializer.KryoSerializer

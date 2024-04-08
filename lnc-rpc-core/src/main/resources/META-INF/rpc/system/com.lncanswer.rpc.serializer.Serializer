@@ -1,0 +1,2 @@
+jdk=com.lncanswer.rpc.serializer.JdkSerializer
+hessian=com.lncanswer.rpc.serializer.HessianSerializer

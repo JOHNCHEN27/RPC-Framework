@@ -42,9 +42,9 @@ public class ConfigUtils {
         }
         configFileBuilder.append(".properties");
         //利用hutool工具包中的Props扩展API 生成一个配置文件名对应的props对象
-        Props props = new Props(new Props(configFileBuilder.toString()));
+        Props props = new Props(configFileBuilder.toString());
         //开启配置文件变动时自动加载
-        props.autoLoad(true);
+        //props.autoLoad(true);
 
         //将从对应的props名的配置文件中读取prefix前缀的属性并返回一个tClass对应的配置类Java对象
         return props.toBean(tClass,prefix);
