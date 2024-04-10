@@ -77,3 +77,61 @@ RpcConfig配置类中需要添加一个属性为默认的Serializer序列化方�
 
 最后在序列化器工厂中使用，SPI机制来指定序列化器对象，静态代码块调用load方法初始化Spi类加载器
 
+### 注册中心基本实现
+注册中心的作用是需要服务提供者将服务注册到注册中心，服务消费者从服务注册中心中读取信息
+类似nacos一样，一个注册中心需要具备数据分布式存储，服务注册，服务发现、心跳检测、服务注销等功能
+对此我们需要一个中间件来完成注册中心的这些核心功能，考虑到高可用、高性能、可靠、稳定，有三种技术选型
+主流的Zookeeper、Redis，更适合存储元信息（注册信息）的元原生中间件Etcd
+
+选取Etcd实现注册中心功能
+Etcd --Go语言实现、开源、分布式的键值存储系统，主要用于分布式系统中服务发现，配置管理，分布式锁等场景
+底层采用Raft一致性算法来保证数据的一致性、可靠性。具有高可用、强一致、分布式特性，简单易用
+Etcd使用层次化的键值来存储数据，类似于文件系统路径的层次结构，能够灵活地单key查询，前缀查询、按范围查询
+核心数据结构就是key-value，一般将序列化之后的值写入value
+核心特性为Lease（租约） -- 对键值对进行TTL超市设置，设置过期时间，当租约到期，键值对被自动删除
+Watch(监听) -- 监听特定的键变化，当发送改变时，会发送相应的通知
+
+Etcd安装：官方下载页：https://github.com/etcd-io/etcd/releases
+安装完成后会得到三个脚本，etcd -- etcd服务本身； etcdctl -- 客户端，用于操作etcd读写数据; etcd -- 备份恢复工具
+执行etcd脚本之后，启动etcd服务，默认占用2379、2380端口
+2379： 提供HttpAPI服务，和etcdctl交互
+2380:  集群中节点间通讯
+
+Etcd可视化工具： 像Redis的Redis Desktop Manager一样
+etcdkeeper: https://github.com/evildecay/etcdkeeper/
+kstone: https://github.com/kstone-io/kstone/tree/master/charts
+推荐etcdkeeper，安装成本更低，学习使用更方便
+默认占用8080端口，可使用-p参数启动时设置端口号, 访问地址:   http://localhost:8080/etcdkeeper
+
+Etcd Java客户端 -- 操作Etcd工具 注意：Java版本必须大于11
+首先在项目中导入jetcd依赖：
+<dependency>
+<groupId>io.etcd</groupId>
+<artifactId>jetcd-core</artifactId>
+<version>0.7.7</version>
+</dependency>
+即可开始使用
+
+Etcd Java常用的客户端API为 kvClient、leaseClient、watchClient
+kvClient: 用于对键值对的操作，通过kvclient获取对象，进行键值的设置、列出目录等
+leaseClient：用于管理etcd的租约机制，理解为设置键值对的过期时间，
+watchClient:用于监视etcd中键的变化，并在键的值发生变化时接受通知
+
+etcd中的每个键都有一个与之对应的版本号，用于追踪键的修改历史，当键的值发生变化，其版本号也会增加，通过
+watchAPI操作，可以监视键的变化，在发生变化时接受通知，使得etcd在分布式系统中能够实现乐观并发控制、一致性、可靠性的数据访问
+
+注册信息定义： 新建一个ServiceMetainfo类，封装服务的注册信息，包括服务名称， 服务版本号、服务地址、服务分组等
+给其添加几个方法，用来获取服务键名，服务注册节点键名等
+当服务提供者注册信息时使用该类来封装注册信息
+
+注册中心配置类：定义一个RegistryConfig类用来封装注册中心初始化的一些信息，包括注册中心类别，注册中心地址
+用户名，密码，超时时间
+
+注册中心接口：利用接口写注册中心功能，方便扩展其他的注册中心，和序列化器一样采用SPI机制动态加载
+接口中包含注册中心初始化方法、注册服务、注销服务、服务发现、服务销毁等方法
+
+创建EtcdRegistry类，用来实现Etcd注册中心的功能，实现注册中心接口方法，完善功能
+
+定义一个注册中心常量类RegistryKeys 用来举例所有支持注册中心的键名
+最重要的一点:使用工厂模式，利用SPI机制从资源文件中获取注册中心对象实例
+在RpcApplication加载的时候初始化注册中心，在ServiceProxy代理对象的时候从注册中心获取服务提供者地址
