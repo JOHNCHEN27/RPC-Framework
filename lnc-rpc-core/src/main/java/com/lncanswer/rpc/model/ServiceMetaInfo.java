@@ -28,15 +28,15 @@ public class ServiceMetaInfo {
      */
     private String serviceAddress;
 
-//    /**
-//     * 服务域名
-//     */
-//    private String serviceHost;
-//
-//    /**
-//     * 服务端口
-//     */
-//    private String servicePort;
+    /**
+     * 服务域名
+     */
+    private String serviceHost;
+
+    /**
+     * 服务端口
+     */
+    private Integer servicePort;
 
     /**
      * 服务分组（暂未实现）
