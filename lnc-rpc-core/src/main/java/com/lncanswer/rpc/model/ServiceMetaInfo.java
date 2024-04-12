@@ -26,7 +26,7 @@ public class ServiceMetaInfo {
     /**
      * 服务地址
      */
-    private String serviceAddress;
+   // private String serviceAddress;
 
     /**
      * 服务域名
@@ -59,13 +59,14 @@ public class ServiceMetaInfo {
      * @return
      */
     public String getServiceNodeKey(){
-        return String.format("%s/%s",getServiceKey(),serviceAddress);
+       // return String.format("%s/%s",getServiceKey(),serviceAddress);
+        return String.format("%s/%s:%s",getServiceKey(),serviceHost,servicePort);
     }
 
-//    public String getServiceAddress(){
-//        if (!StrUtil.contains(serviceHost,"http")){
-//            return String.format("http://%s:%s",serviceHost,servicePort);
-//        }
-//        return String.format("%s:%s",serviceHost,servicePort);
-//    }
+    public String getServiceAddress(){
+        if (!StrUtil.contains(serviceHost,"http")){
+            return String.format("http://%s:%s",serviceHost,servicePort);
+        }
+        return String.format("%s:%s",serviceHost,servicePort);
+    }
 }

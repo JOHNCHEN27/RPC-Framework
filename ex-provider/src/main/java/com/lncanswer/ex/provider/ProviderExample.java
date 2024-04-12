@@ -10,6 +10,7 @@ import com.lncanswer.rpc.registry.LocalRegistry;
 import com.lncanswer.rpc.registry.Registry;
 import com.lncanswer.rpc.registry.RegistryFactory;
 import com.lncanswer.rpc.server.VertxHttpServer;
+import com.lncanswer.rpc.server.tcp.VertxTcpServer;
 
 /**
  * @author LNC
@@ -32,7 +33,9 @@ public class ProviderExample {
         Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
         ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
         serviceMetaInfo.setServiceName(serviceName);
-        serviceMetaInfo.setServiceAddress(rpcConfig.getServerHost() + ":" +rpcConfig.getServerPort());
+       // serviceMetaInfo.setServiceAddress(rpcConfig.getServerHost() + ":" +rpcConfig.getServerPort());
+        serviceMetaInfo.setServiceHost(rpcConfig.getServerHost());
+        serviceMetaInfo.setServicePort(rpcConfig.getServerPort());
 
         try {
             registry.register(serviceMetaInfo);
@@ -41,7 +44,11 @@ public class ProviderExample {
         }
 
         //启动Web服务
-        VertxHttpServer httpServer = new VertxHttpServer();
-        httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+       // VertxHttpServer httpServer = new VertxHttpServer();
+       // httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
+
+        //启动TCP服务
+        VertxTcpServer vertxTcpServer = new VertxTcpServer();
+        vertxTcpServer.doStart(8080);
     }
 }
