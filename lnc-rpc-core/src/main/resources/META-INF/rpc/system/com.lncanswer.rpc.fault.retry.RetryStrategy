@@ -1,0 +1,2 @@
+no=com.lncanswer.rpc.fault.retry.NoRetryStrategy
+fixedInterval=com.lncanswer.rpc.fault.retry.FixedIntervalRetryStrategy
