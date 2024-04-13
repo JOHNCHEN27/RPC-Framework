@@ -1,6 +1,7 @@
 package com.lncanswer.rpc.config;
 
 import com.lncanswer.rpc.fault.retry.RetryStrategyKeys;
+import com.lncanswer.rpc.fault.tolerant.TolerantStrategyKeys;
 import com.lncanswer.rpc.loadbalancer.LoadBalancerKeys;
 import com.lncanswer.rpc.serializer.Serializer;
 import com.lncanswer.rpc.serializer.SerializerKeys;
@@ -59,4 +60,9 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NO;
+
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 }

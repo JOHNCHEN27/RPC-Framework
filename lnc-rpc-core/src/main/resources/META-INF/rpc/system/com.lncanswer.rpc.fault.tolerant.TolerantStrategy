@@ -1,0 +1,4 @@
+failBack=com.lncanswer.rpc.fault.tolerant.FailBackTolerantStrategy
+failFast=com.lncanswer.rpc.fault.tolerant.FailFastTolerantStrategy
+failOver=com.lncanswer.rpc.fault.tolerant.FailOverTolerantStrategy
+failSafe=com.lncanswer.rpc.fault.tolerant.FailSafeTolerantStrategy
