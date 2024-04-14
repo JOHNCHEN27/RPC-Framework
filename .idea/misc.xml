@@ -10,6 +10,9 @@
         <option value="$PROJECT_DIR$/ex-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/ex-common/pom.xml" />
         <option value="$PROJECT_DIR$/lnc-rpc-core/pom.xml" />
+        <option value="$PROJECT_DIR$/lnc-rpc-spring-boot-starter/pom.xml" />
+        <option value="$PROJECT_DIR$/ex-springboot-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/ex-springboot-provider/pom.xml" />
       </list>
     </option>
   </component>

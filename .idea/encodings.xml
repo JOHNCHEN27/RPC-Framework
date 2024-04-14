@@ -7,8 +7,14 @@
     <file url="file://$PROJECT_DIR$/ex-consumer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ex-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ex-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ex-springboot-consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ex-springboot-consumer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ex-springboot-provider/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ex-springboot-provider/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lnc-rpc-easy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lnc-rpc-easy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lnc-rpc-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lnc-rpc-spring-boot-starter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
